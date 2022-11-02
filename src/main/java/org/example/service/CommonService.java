@@ -51,12 +51,27 @@ public abstract class CommonService {
         Response response = requestSpecification
                                 .body(body)
                                 .expect()
-                                .statusCode(HttpStatus.SC_CREATED)
+                                .statusCode(HttpStatus.SC_OK)
                                 .log()
                                 .ifError()
 
                                 .when()
                                 .post(prepareUri.apply(uri));
+
+        Log.info("The response body is \n" + response.asPrettyString());
+        return response;
+    }
+
+    protected Response deleteRequest(String uri) {
+        Log.info("Sending the DELETE request to the Uri " + uri);
+        Response response = requestSpecification
+                .expect()
+                .statusCode(HttpStatus.SC_OK)
+                .log()
+                .ifError()
+
+                .when()
+                .delete(prepareUri.apply(uri));
 
         Log.info("The response body is \n" + response.asPrettyString());
         return response;

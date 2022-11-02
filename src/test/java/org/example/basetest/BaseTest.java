@@ -5,21 +5,25 @@ import org.example.entities.Pet;
 import java.util.Random;
 
 public class BaseTest {
+    protected Long ID;
+    protected String AVAILABLE = "available";
+    protected String PENDING = "pending";
+    protected String SOLD = "sold";
 
-    protected Pet createPet() {
+    protected Pet createPet(String status) {
         return new Pet()
                 .setId(generateNewId())
                 .setName("Dodger")
-                .setStatus("active");
+                .setStatus(status);
     }
 
     protected Long generateNewId() {
         Random random = new Random();
-        long id = random.nextLong();
+        ID = random.nextLong();
 
-        while (id < 0) {
-            id = id * (-1);
+        while (ID < 0) {
+            ID = ID * (-1);
         }
-        return id;
+        return ID;
     }
 }

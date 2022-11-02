@@ -1,5 +1,6 @@
 package org.example.steps;
 
+import org.example.entities.DeleteResponse;
 import org.example.entities.Pet;
 import org.example.service.PetService;
 
@@ -30,9 +31,16 @@ public class PetServiceSteps {
                 .getList("", Pet.class);
     }
 
-    public static Pet createPet(Pet expectedPet) {
+
+    public static Pet postNewPet(Pet expectedPet) {
         return PET_SERVICE
                 .postRequest(PETS, expectedPet)
                 .as(Pet.class);
+    }
+
+    public static DeleteResponse deletePetById(Long id) {
+        return PET_SERVICE
+                .deleteRequest(PET_BY_ID, id)
+                .as(DeleteResponse.class);
     }
 }
